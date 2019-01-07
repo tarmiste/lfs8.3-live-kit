@@ -1,0 +1,25 @@
+# 780-scons
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="scons"
+PKG_VERSION="3.0.0"
+PKG_FILE="scons-${PKG_VERSION}.tar.gz"
+URL="http://downloads.sourceforge.net/scons/scons-${PKG_VERSION}.tar.gz"
+MD5="1c99878d0eaf9b768b50721e913142d3"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=""
+
+( cat << "xEOFx"
+   python setup.py install --prefix=/usr  \
+                           --standard-lib \
+                           --optimize=1   \
+                           --install-data=/usr/share
+
+xEOFx
+) > tmp

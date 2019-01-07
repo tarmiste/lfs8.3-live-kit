@@ -1,0 +1,58 @@
+# 660-openssh
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="openssh"
+PKG_VERSION="7.7p1"
+PKG_FILE="openssh-${PKG_VERSION}.tar.gz"
+URL="http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${PKG_VERSION}.tar.gz"
+MD5="68ba883aff6958297432e5877e9a0fe2"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1="http://www.linuxfromscratch.org/patches/blfs/8.3/openssh-${PKG_VERSION}-openssl-1.1.0-1.patch 55e7b5588c5c10f09a4a08477eb56f6b"
+
+( cat << "xEOFx"
+   install  -v -m700 -d /var/lib/sshd &&
+   chown    -v root:sys /var/lib/sshd &&
+   
+   groupadd -g 50 sshd        &&
+   useradd  -c 'sshd PrivSep' \
+            -d /var/lib/sshd  \
+            -g sshd           \
+            -s /bin/false     \
+            -u 50 sshd
+
+   patch -Np1 -i ../openssh-7.7p1-openssl-1.1.0-1.patch
+   ./configure --prefix=/usr                     \
+               --sysconfdir=/etc/ssh             \
+               --with-md5-passwords              \
+               --with-privsep-path=/var/lib/sshd &&
+   make
+   #make -k tests || true
+   make install &&
+   install -v -m755    contrib/ssh-copy-id /usr/bin     &&
+
+   install -v -m644    contrib/ssh-copy-id.1 \
+                       /usr/share/man/man1              &&
+   install -v -m755 -d /usr/share/doc/openssh-7.7p1     &&
+   install -v -m644    INSTALL LICENCE OVERVIEW README* \
+                       /usr/share/doc/openssh-7.7p1
+   
+   #echo "PermitRootLogin no" >> /etc/ssh/sshd_config
+   
+   #ssh-keygen &&
+   #ssh-copy-id -i ~/.ssh/id_rsa.pub **EDITMEREMOTE_USERNAMEEDITME**@**EDITMEREMOTE_HOSTNAMEEDITME**
+   
+   #echo "PasswordAuthentication no" >> /etc/ssh/sshd_config &&
+   #echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
+   
+   #sed 's@d/login@d/sshd@g' /etc/pam.d/login > /etc/pam.d/sshd &&
+   #chmod 644 /etc/pam.d/sshd &&
+   #echo "UsePAM yes" >> /etc/ssh/sshd_config
+
+xEOFx
+) > tmp

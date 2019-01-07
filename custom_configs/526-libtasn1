@@ -1,0 +1,25 @@
+# 630-libtasn1
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="libtasn1"
+PKG_VERSION="4.13"
+PKG_FILE="libtasn1-${PKG_VERSION}.tar.gz "
+URL="http://ftp.gnu.org/gnu/libtasn1/libtasn1-${PKG_VERSION}.tar.gz"
+MD5="ce2ba4d3088119b48e7531a703669c52"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=""
+
+( cat << "xEOFx"
+   ./configure --prefix=/usr --disable-static &&
+   make
+   make check
+   make -j1 install
+   #make -j1 -C doc/reference install-data-local
+xEOFx
+) > tmp

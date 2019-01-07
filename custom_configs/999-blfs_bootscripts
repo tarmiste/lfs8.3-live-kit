@@ -1,0 +1,24 @@
+# 999-blfs_bootscripts
+# 
+#
+PKG="blfs-bootscripts"
+PKG_VERSION="20180105"
+PKG_FILE="blfs-bootscripts-${PKG_VERSION}.tar.xz"
+URL="http://anduin.linuxfromscratch.org/sources/BLFS/conglomeration/blfs-bootscripts/${PKG_FILE}"
+MD5="7bed272b5af14abc6a3705e4d40326bf"
+for i in PATCH{1..10}; do
+   unset $i
+done
+
+( cat << "xEOFx"
+
+#
+# Insert ALL the blfs bootscripts you want to install
+# EXAMPLE
+#
+make install-gpm
+make install-sshd
+make install-service-dhcpcd
+make install-service-wpa
+xEOFx
+) > tmp

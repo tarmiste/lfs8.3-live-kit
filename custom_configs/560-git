@@ -1,0 +1,31 @@
+# 760-git
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="git"
+PKG_VERSION="2.18.0"
+PKG_FILE="git-${PKG_VERSION}.tar.xz"
+URL="https://www.kernel.org/pub/software/scm/git/git-${PKG_VERSION}.tar.xz"
+MD5="7a668403aa7807d0db37e8573299d471"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=""
+
+( cat << "xEOFx"
+   ./configure --prefix=/usr --with-gitconfig=/etc/gitconfig &&
+   make
+
+   #make html
+   #make man
+   #make -k test || true
+
+   make -j1 install
+   #make -j1 install-man
+   #make -j1 htmldir=/usr/share/doc/git-2.18.0 install-html
+
+xEOFx
+) > tmp

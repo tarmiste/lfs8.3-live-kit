@@ -1,0 +1,30 @@
+# 655-pciutils
+# 
+#
+#
+
+PKG="pciutils"
+PKG_VERSION="3.6.2"
+PKG_FILE="pciutils-${PKG_VERSION}.tar.xz"
+URL="ftp://ftp.kernel.org/pub/software/utils/pciutils/${PKG_FILE}"
+MD5="77963796d1be4f451b83e6da28ba4f82"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=
+
+( cat << "xEOFx"
+
+make PREFIX=/usr                \
+     SHAREDIR=/usr/share/hwdata \
+     SHARED=yes
+
+make PREFIX=/usr               \
+     SHAREDIR=/usr/share/hwdata \
+     SHARED=yes                 \
+     install install-lib        &&
+
+chmod -v 755 /usr/lib/libpci.so
+
+xEOFx
+) > tmp

@@ -1,0 +1,29 @@
+# 735-tidy-html
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="tidy-html"
+PKG_VERSION="5.4.0"
+PKG_FILE="${PKG_VERSION}.tar.gz"
+URL="https://github.com/htacg/tidy-html5/archive/${PKG_VERSION}.tar.gz"
+MD5="7e121e1da7e21dc47610b87aae4b4f65"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=""
+
+( cat << "xEOFx"
+   cd build/cmake &&
+   cmake -DCMAKE_INSTALL_PREFIX=/usr \
+         -DCMAKE_BUILD_TYPE=Release  \
+         -DBUILD_TAB2SPACE=ON        \
+         ../..    &&
+   make
+   make -j1 install &&
+   install -v -m755 tab2space /usr/bin
+
+xEOFx
+) > tmp

@@ -1,0 +1,56 @@
+# 797-ntp
+# 
+#
+
+PKG="ntp"
+PKG_VERSION="4.2.8p12"
+PKG_FILE="ntp-${PKG_VERSION}.tar.gz"
+URL="https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p12.tar.gz"
+MD5="1522d66574bae14abb2622746dad2bdc"
+for i in PATCH{1..10}; do
+   unset $i
+done
+
+( cat << "xEOFx"
+
+groupadd -g 87 ntp &&
+useradd -c "Network Time Protocol" -d /var/lib/ntp -u 87 \
+        -g ntp -s /bin/false ntp
+
+./configure --prefix=/usr         \
+            --bindir=/usr/sbin    \
+            --sysconfdir=/etc     \
+            --enable-linuxcaps    \
+            --with-lineeditlibs=readline \
+            --docdir=/usr/share/doc/ntp-4.2.8p12 &&
+make
+
+#make check
+
+make install &&
+install -v -o ntp -g ntp -d /var/lib/ntp
+
+cat > /etc/ntp.conf << "EOF"
+# Asia
+server 0.asia.pool.ntp.org
+
+# Australia
+server 0.oceania.pool.ntp.org
+
+# Europe
+server 0.europe.pool.ntp.org
+
+# North America
+server 0.north-america.pool.ntp.org
+
+# South America
+server 2.south-america.pool.ntp.org
+
+driftfile /var/lib/ntp/ntp.drift
+pidfile   /var/run/ntpd.pid
+
+leapfile  /etc/ntp.leapseconds
+EOF
+
+xEOFx
+) > tmp

@@ -1,0 +1,25 @@
+# 800-wireless_tools
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="wireless_tools"
+PKG_VERSION="29"
+PKG_FILE="wireless_tools.${PKG_VERSION}.tar.gz"
+URL="http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/wireless_tools.${PKG_VERSION}.tar.gz"
+MD5="e06c222e186f7cc013fd272d023710cb"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1="http://www.linuxfromscratch.org/patches/blfs/8.3/wireless_tools-29-fix_iwlist_scanning-1.patch 9db3a9451d8cb969e388e089be401408"
+
+( cat << "xEOFx"
+   patch -Np1 -i ../wireless_tools-29-fix_iwlist_scanning-1.patch
+   make
+   make -j1 PREFIX=/usr INSTALL_MAN=/usr/share/man install
+
+xEOFx
+) > tmp
+

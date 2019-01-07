@@ -1,0 +1,29 @@
+# 770-apr-util
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="apr-util"
+PKG_VERSION="1.6.1"
+PKG_FILE="apr-util-${PKG_VERSION}.tar.bz2"
+URL="http://archive.apache.org/dist/apr/apr-util-${PKG_VERSION}.tar.bz2"
+MD5="8ff5dc36fa39a2a3db1df196d3ed6086"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=""
+
+( cat << "xEOFx"
+   ./configure --prefix=/usr       \
+               --with-apr=/usr     \
+               --with-gdbm=/usr    \
+               --with-openssl=/usr \
+               --with-crypto &&
+   make
+   #make -k test || true
+   make -j1 install
+
+xEOFx
+) > tmp

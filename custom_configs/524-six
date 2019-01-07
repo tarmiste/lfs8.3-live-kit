@@ -1,0 +1,25 @@
+# 627-six
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="six"
+PKG_VERSION="1.11.0"
+PKG_FILE="six-${PKG_VERSION}.tar.gz"
+URL="https://pypi.io/packages/source/s/six/six-1.11.0.tar.gz"
+
+MD5="d12789f9baf7e9fb2524c0c64f1773f8"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=""
+
+( cat << "xEOFx"
+   #python2 setup.py build
+   #python2 setup.py install --optimize=1
+   python3 setup.py build
+   python3 setup.py install --optimize=1
+xEOFx
+) > tmp

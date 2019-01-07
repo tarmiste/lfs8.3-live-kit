@@ -1,0 +1,26 @@
+# 610-squashfstools
+# 
+#
+#
+
+PKG="squashfstools"
+PKG_VERSION="4.3"
+PKG_FILE="squashfs${PKG_VERSION}.tar.gz"
+URL="http://sourceforge.net/projects/squashfs/files/squashfs/squashfs4.3/squashfs4.3.tar.gz"
+MD5="d92ab59aabf5173f2a59089531e30dbf"
+for i in PATCH{1..10}; do
+   unset $i
+done
+
+( cat << "xEOFx"
+
+    cd squashfs-tools
+    sed -i '1,1i#include <sys/sysmacros.h>' mksquashfs.c unsquashfs.c
+    sed 's@#XZ_SUPPORT@XZ_SUPPORT@g' -i Makefile
+    sed 's@COMP_DEFAULT = gzip@COMP_DEFAULT = xz@g' -i Makefile
+    make
+    make INSTALL_DIR=/usr/bin install
+    mksquashfs -version
+
+xEOFx
+) > tmp

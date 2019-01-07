@@ -1,0 +1,31 @@
+# 730-cmake
+# 
+#
+#
+# Any comments you wish to add
+#
+
+PKG="cmake"
+PKG_VERSION="3.12.1"
+PKG_FILE="cmake-${PKG_VERSION}.tar.gz"
+URL="http://www.cmake.org/files/v3.12/cmake-${PKG_VERSION}.tar.gz"
+MD5="10109246a51102bfda45ff3935275fbf"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=""
+
+( cat << "xEOFx"
+   sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
+   ./bootstrap --prefix=/usr       \
+               --system-libs       \
+               --mandir=/share/man \
+               --no-system-jsoncpp \
+               --no-system-librhash \
+               --docdir=/share/doc/cmake-3.12.1 &&
+   make
+   #bin/ctest -j<N> -O cmake-3.12.1-test.log
+   make -j1 install
+
+xEOFx
+) > tmp
