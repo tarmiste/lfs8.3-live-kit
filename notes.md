@@ -1,10 +1,14 @@
 
 # Notes
 
-08Jan2019:
+  Misc. notes about the lfs8.3-live-kit.
+
+
+
+## 08Jan2019:
 
 The live CD build scriptlets are mostly (but not entirely) consistent 
-with the versions and build instructions from BLFS 8.3.   
+with the versions and build instructions from BLFS 8.3.  
 
 The yaboot package (only for ppc) is packaged as a binary and provided in
 the extrasources directory.   Building yaboot from source is dependent
