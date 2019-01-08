@@ -1,8 +1,9 @@
 
+# BUILDING THE LIVE CD
 
-OVERVIEW:
+##OVERVIEW:
 
-   Building a live image consists of the following steps.  All of these
+   Building a live image consists of the following steps.  All of the live CD build
    steps are done as non-root user (with sudo priveleges)::
 
    0) Obtain the lfs8.3-live-kit.  (Git clone it or download and unzip the zip file)
@@ -15,10 +16,8 @@ OVERVIEW:
       This script prepares a target directory and a host directory and
       populates the directories with various various scripts and 
       config files that are useful for creating the live image.
-
       
-      
-   2) cd to the lfs..._host/jhalfs directory and run jhalfs to build
+   2) cd to the ~HOME/lfs83live_host/jhalfs directory and run jhalfs to build
       the LFS system.
 
    3) Run host scripts.
@@ -29,7 +28,7 @@ OVERVIEW:
    Each of these steps is described in more detail following.
 
 
-PREREQUISITES:
+##PREREQUISITES:
 
    The user should be familiar with LFS and jhalfs.  
 
@@ -37,7 +36,7 @@ PREREQUISITES:
    not build the live image as root.   
 
    The host system architecture must match the desired architecture of
-   the live image.  i.e.  an x86_64 live image must be built on a
+   the live image.  e.g.  an x86_64 live image must be built on a
    x86_64 host, and not on a 32 bit host.
 
    The host system must comply with the host system requirements 
@@ -62,10 +61,10 @@ PREREQUISITES:
 
    
 
-LFSLIVE_PREP.SH:
+##LFSLIVE_PREP.SH:
 
 
-   In the lfs8.3-live-kit directory, run the following command:
+   cd into the lfs8.3-live-kit directory, run the following command:
 
    ./lfslive_prep.sh
 
@@ -84,21 +83,21 @@ LFSLIVE_PREP.SH:
    directory(s), and remove them after saving any needed data, and
    then rerun the script.
 
-   The host directory will contain a copy of jhalfs, a copy of the LFS
+   The lfs83live_host directory will contain a copy of jhalfs, a copy of the LFS
    8.3 book (xml format), a kernel config file and other files that may
    be useful in creating the live image.
 
-   The target directory will contain a collateral folder which contains
-   files and information that may be useful to the LFSlive end user.   It
-   will also contain a sources folder which contains a file or two which
-   will be needed during the LFS image build and cannot be reasonably
-   downloaded.
+   The /mnt/lfs83live_target directory will contain a collateral folder
+   which contains files and information that may be useful to the LFSlive 
+   end user.   It will also contain a sources folder which contains  several
+   files which will be needed during the LFS image build and cannot be
+   easily found and downloaded.
 
    Upon successful completion, move on to the next step.
 
 
 
-LFSLIVE BUILD:
+##LFSLIVE BUILD:
 
    Do: "cd ~HOME/lfs83live_host" 
 
@@ -109,25 +108,32 @@ LFSLIVE BUILD:
    ignored.
 
    If, and only if,  building for PowerPC, then unpack the LFS 8.3 book 
-   tarball and apply the ppc book patch to it.
+   tarball and apply the ppc book patch to it.  The ppc book patch
+   may break x86 builds and so should not be applied for x86 builds.
+
+   tar xvf lfs-book-8.3-xml.tar.gz
+   cd lfs-8.3
+   cat ../lfs83_anyarch_book.patch |patch -Np1
+   cd ..
 
    Find the live kernel config (*-live-config).   It will be used by
    jhalfs during the kernel build.
 
    Next do: "cd jhalfs ; make clean; make"
 
-   Select the needed jhalfs menu options:
+   Select the needed jhalfs menu options as follows:
 
-   1) Select local working copy of LFS book and point it to the local copy
-      of the LFS book.  
+   1) EIther local working copy of LFS book and point it to the local copy
+      of the LFS book or select jhalfs to download the appropriate book.
 
-   2) Select custom tools.  The prep script already populated the jhalfs
+   2) Select custom tools.  The prep script has already populated the jhalfs
       custom/config directory with the scripts needed to build the live
-      image.
+      image.  Selecting custom tools 
 
    3) Select build directory of /mnt/lfs83live_target.
 
-   4) Select download packages.   
+   4) Select to download packages. 
+      (Or otherwise populate /mnt/lfs83live_target/sources with the needed source packages.)
 
    5) Select run Makefile.
 
@@ -143,13 +149,16 @@ LFSLIVE BUILD:
 
 
 
-HOST LIVE BUILD
+##HOST LIVE BUILD
 
-   Upon completion of the jhalfs build, there remains several tasks
-   that must be completed on the host (rather than in the chroot).
+   Upon completion of the jhalfs build, the lfs live CD root filesystem
+   exists in /mnt/lfs83live_target.  There remains several steps to 
+   perform to package the LFS root filesystem into bootable CD format.
 
    It may be prudent to reboot the host machine at this point before
-   running the host scripts.
+   running the host scripts.   If LFS mounts are still lingering, 
+   the next few steps run into problems, so a reboot at this point
+   may be prudent.
 
    The jhalfs build has created a host_scripts directory and placed
    3 host scripts in it:
@@ -176,20 +185,22 @@ HOST LIVE BUILD
 
    $LFS/host_scripts/make_live_squashed_root.sh
 
+   (the sources/syslinux package is needed by the make_live_tree script
+    so now replace the /sources directory..):
+
    sudo mv /mnt/savelfs83sources $LFS/sources 
    
    $LFS/host_scripts/make_live_tree.sh
 
    $LFS/host_scripts/make_live_iso.sh
 
- 
 
 The resulting live image will be found in a file of the following format:
 
 lfslive-<ARCH>_<DATE>.iso
 
-It can be burned to cd or written to a USB flash drive (USB flash drive
-not supported for PowerPC).
+It can be burned to cd or written to a USB flash drive with dd (USB 
+flash drive not supported for PowerPC).
 
 
 

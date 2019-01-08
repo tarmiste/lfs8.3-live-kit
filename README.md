@@ -12,7 +12,9 @@ CD project that previously existed as part of the LFS project.  This
 project is a new approach to building a LFS live CD and is not
 endorsed nor sponsored by the mainline LFS project.  So, don't 
 ask for support or raise issues about this project on the LFS 
-mailing lists.
+mailing lists.   If you have questions/troubles, you can file
+an issue in this repository but fixes and answers are not
+guaranteed.
 
 ## Goals
 
@@ -23,7 +25,7 @@ mailing lists.
 
 2) Low maintenance.  Should be easy to port to new versions of
    LFS as they are released.  The contents of the live CD will
-   be what is required to build LFS on a target system and not
+   be enough to build LFS on a target system but not
    much more than that.  Minimizing the packages on the live CD
    will minimize the maintenance required and effort needed to
    adapt it to future LFS releases.
@@ -41,7 +43,7 @@ mailing lists.
 
 6) The 'live CD' image should also be bootable via USB flash drive.
 
-7) Targeted machines: x86_64, i686, PowerMACs (32 and 64 bit).
+7) Targeted machines are: x86_64, i686, PowerMACs (32 and 64 bit).
 
 ## Overview of live CD build process
 
@@ -61,13 +63,13 @@ mailing lists.
    /mnt/lfs83live_target directory.
 
 5) Set 'export LFS=/mnt/lfs83live_target' and then run 3 shell scripts
-   which squash the live rootfs and package it into a bootable CD ISO
-   image.
+   which squash the live rootfs, add a ram disk and then and package it 
+   into a bootable CD ISO image.
 
 
 ## Repository contents:
 
-lfslive_prep.sh:  Script to kick off the process.
+lfslive_prep.sh:  First script to run.  Sets up directories for the build.
 
 custom_configs:  Build scriptlets for live CD packages.
 
