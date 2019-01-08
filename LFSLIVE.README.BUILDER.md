@@ -1,7 +1,7 @@
 
 # BUILDING THE LIVE CD
 
-##OVERVIEW:
+## OVERVIEW:
 
    Building a live image consists of the following steps.  All of the live CD build
    steps are done as non-root user (with sudo priveleges)::
@@ -28,7 +28,7 @@
    Each of these steps is described in more detail following.
 
 
-##PREREQUISITES:
+## PREREQUISITES:
 
    The user should be familiar with LFS and jhalfs.  
 
@@ -61,7 +61,7 @@
 
    
 
-##LFSLIVE_PREP.SH:
+## LFSLIVE_PREP.SH:
 
 
    cd into the lfs8.3-live-kit directory, run the following command:
@@ -97,7 +97,7 @@
 
 
 
-##LFSLIVE BUILD:
+## LFSLIVE BUILD:
 
    Do: "cd ~HOME/lfs83live_host" 
 
@@ -149,7 +149,7 @@
 
 
 
-##HOST LIVE BUILD
+## HOST LIVE BUILD
 
    Upon completion of the jhalfs build, the lfs live CD root filesystem
    exists in /mnt/lfs83live_target.  There remains several steps to 
