@@ -93,6 +93,10 @@
    files which will be needed during the LFS image build and cannot be
    easily found and downloaded.
 
+   Note that the /mnt/lfs83live_target is a simple directory and is not
+   a disk partition.  There is no need to create a partition for the 
+   lfs live image since it will be written to a CD, and not into a partition.
+
    Upon successful completion, move on to the next step.
 
 
