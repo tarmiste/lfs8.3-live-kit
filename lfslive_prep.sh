@@ -102,7 +102,7 @@ case $(uname -m) in
     ;;
 esac
 
-cp LFSLIVE.README.BUILDER $LFS_HOST
+cp LFSLIVE.README.BUILDER* $LFS_HOST
 
 echo
 echo THe LFS live build preperation step is complete.  
