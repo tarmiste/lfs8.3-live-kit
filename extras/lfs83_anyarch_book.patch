@@ -1,6 +1,6 @@
-diff -Naur olfs-8.3/chapter05/binutils-pass1.xml nlfs-8.3/chapter05/binutils-pass1.xml
---- olfs-8.3/chapter05/binutils-pass1.xml	2018-09-02 23:16:48.913734811 +0000
-+++ nlfs-8.3/chapter05/binutils-pass1.xml	2018-09-02 23:17:45.983750846 +0000
+diff -Naur a/chapter05/binutils-pass1.xml b/chapter05/binutils-pass1.xml
+--- a/chapter05/binutils-pass1.xml	2019-01-09 20:49:38.796915288 +0000
++++ b/chapter05/binutils-pass1.xml	2019-01-09 20:50:54.267138705 +0000
 @@ -146,11 +146,13 @@
      tests at this point are minimal since the programs from this
      first pass will soon be replaced by those from the second.</para>
@@ -16,9 +16,9 @@ diff -Naur olfs-8.3/chapter05/binutils-pass1.xml nlfs-8.3/chapter05/binutils-pas
  esac</userinput></screen>
  
      <para>Install the package:</para>
-diff -Naur olfs-8.3/chapter05/gcc-pass1.xml nlfs-8.3/chapter05/gcc-pass1.xml
---- olfs-8.3/chapter05/gcc-pass1.xml	2018-09-02 23:16:48.913734811 +0000
-+++ nlfs-8.3/chapter05/gcc-pass1.xml	2018-09-02 23:17:45.983750846 +0000
+diff -Naur a/chapter05/gcc-pass1.xml b/chapter05/gcc-pass1.xml
+--- a/chapter05/gcc-pass1.xml	2019-01-09 20:49:38.796915288 +0000
++++ b/chapter05/gcc-pass1.xml	2019-01-09 20:50:54.271138823 +0000
 @@ -68,7 +68,8 @@
      class="directory">/usr/include</filename> from GCC's include search path.
      Issue:</para>
@@ -52,13 +52,13 @@ diff -Naur olfs-8.3/chapter05/gcc-pass1.xml nlfs-8.3/chapter05/gcc-pass1.xml
 +
 +<screen><userinput remap="pre">case $(uname -m) in
 +  armv6l)
-+    patch -Np1 -i ../gcc-7.3.0-armv6.patch
++    patch -Np1 -i ../gcc-8.2.0-armv6.patch
 + ;;
 +  armv7l)
-+    patch -Np1 -i ../gcc-7.3.0-armv7.patch
++    patch -Np1 -i ../gcc-8.2.0-armv7.patch
 + ;;
 +  armv8l)
-+    patch -Np1 -i ../gcc-7.3.0-armv8.patch
++    patch -Np1 -i ../gcc-8.2.0-armv8.patch
 + ;;
  esac</userinput></screen>
  
@@ -71,9 +71,9 @@ diff -Naur olfs-8.3/chapter05/gcc-pass1.xml nlfs-8.3/chapter05/gcc-pass1.xml
      --enable-languages=c,c++</userinput></screen>
      <variablelist>
        <title>The meaning of the configure options:</title>
-diff -Naur olfs-8.3/chapter05/gcc-pass2.xml nlfs-8.3/chapter05/gcc-pass2.xml
---- olfs-8.3/chapter05/gcc-pass2.xml	2018-09-02 23:16:48.913734811 +0000
-+++ nlfs-8.3/chapter05/gcc-pass2.xml	2018-09-02 23:17:45.983750846 +0000
+diff -Naur a/chapter05/gcc-pass2.xml b/chapter05/gcc-pass2.xml
+--- a/chapter05/gcc-pass2.xml	2019-01-09 20:49:38.796915288 +0000
++++ b/chapter05/gcc-pass2.xml	2019-01-09 20:50:54.271138823 +0000
 @@ -70,7 +70,8 @@
      use the one installed in <filename
      class="directory">/tools</filename>.</para>
@@ -107,13 +107,13 @@ diff -Naur olfs-8.3/chapter05/gcc-pass2.xml nlfs-8.3/chapter05/gcc-pass2.xml
 +
 +<screen><userinput remap="pre">case $(uname -m) in
 +  armv6l)
-+    patch -Np1 -i ../gcc-7.3.0-armv6.patch
++    patch -Np1 -i ../gcc-8.2.0-armv6.patch
 + ;;
 +  armv7l)
-+    patch -Np1 -i ../gcc-7.3.0-armv7.patch
++    patch -Np1 -i ../gcc-8.2.0-armv7.patch
 + ;;
 +  armv8l)
-+    patch -Np1 -i ../gcc-7.3.0-armv8.patch
++    patch -Np1 -i ../gcc-8.2.0-armv8.patch
 + ;;
  esac</userinput></screen>
  
@@ -126,9 +126,9 @@ diff -Naur olfs-8.3/chapter05/gcc-pass2.xml nlfs-8.3/chapter05/gcc-pass2.xml
      --disable-libgomp</userinput></screen>
  
      <variablelist>
-diff -Naur olfs-8.3/chapter05/glibc.xml nlfs-8.3/chapter05/glibc.xml
---- olfs-8.3/chapter05/glibc.xml	2018-09-02 23:16:48.913734811 +0000
-+++ nlfs-8.3/chapter05/glibc.xml	2018-09-02 23:17:45.983750846 +0000
+diff -Naur a/chapter05/glibc.xml b/chapter05/glibc.xml
+--- a/chapter05/glibc.xml	2019-01-09 20:49:38.796915288 +0000
++++ b/chapter05/glibc.xml	2019-01-09 20:50:54.271138823 +0000
 @@ -57,6 +57,7 @@
        --build=$(../scripts/config.guess) \
        --enable-kernel=&min-kernel;             \
@@ -152,9 +152,9 @@ diff -Naur olfs-8.3/chapter05/glibc.xml nlfs-8.3/chapter05/glibc.xml
    </caution>
  
    <note><para>Building Binutils in the section after next will serve as an
-diff -Naur olfs-8.3/chapter06/adjusting.xml nlfs-8.3/chapter06/adjusting.xml
---- olfs-8.3/chapter06/adjusting.xml	2018-09-02 23:16:48.901734230 +0000
-+++ nlfs-8.3/chapter06/adjusting.xml	2018-09-02 23:17:45.983750846 +0000
+diff -Naur a/chapter06/adjusting.xml b/chapter06/adjusting.xml
+--- a/chapter06/adjusting.xml	2019-01-09 20:49:38.784914934 +0000
++++ b/chapter06/adjusting.xml	2019-01-09 20:50:54.271138823 +0000
 @@ -16,13 +16,13 @@
  
    <para>First, backup the <filename class="directory">/tools</filename> linker,
@@ -173,9 +173,9 @@ diff -Naur olfs-8.3/chapter06/adjusting.xml nlfs-8.3/chapter06/adjusting.xml
  
    <para>Next, amend the GCC specs file so that it points to the new
    dynamic linker. Simply deleting all instances of <quote>/tools</quote> should
-diff -Naur olfs-8.3/chapter06/chapter06.xml nlfs-8.3/chapter06/chapter06.xml
---- olfs-8.3/chapter06/chapter06.xml	2018-09-02 23:16:48.897734037 +0000
-+++ nlfs-8.3/chapter06/chapter06.xml	2018-09-02 23:17:45.987750950 +0000
+diff -Naur a/chapter06/chapter06.xml b/chapter06/chapter06.xml
+--- a/chapter06/chapter06.xml	2019-01-09 20:49:38.780914816 +0000
++++ b/chapter06/chapter06.xml	2019-01-09 20:50:54.271138823 +0000
 @@ -77,7 +77,6 @@
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="gawk.xml"/>
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="findutils.xml"/>
@@ -184,9 +184,21 @@ diff -Naur olfs-8.3/chapter06/chapter06.xml nlfs-8.3/chapter06/chapter06.xml
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="less.xml"/>
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="gzip.xml"/>
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="iproute2.xml"/>
-diff -Naur olfs-8.3/chapter06/creatingdirs.xml nlfs-8.3/chapter06/creatingdirs.xml
---- olfs-8.3/chapter06/creatingdirs.xml	2018-09-02 23:16:48.905734424 +0000
-+++ nlfs-8.3/chapter06/creatingdirs.xml	2018-09-02 23:17:45.987750950 +0000
+diff -Naur a/chapter06/coreutils.xml b/chapter06/coreutils.xml
+--- a/chapter06/coreutils.xml	2019-01-09 20:49:38.784914934 +0000
++++ b/chapter06/coreutils.xml	2019-01-09 20:56:44.681362515 +0000
+@@ -45,7 +45,7 @@
+     boundaries correctly even in multibyte locales. The following patch fixes
+     this non-compliance and other internationalization-related bugs.</para>
+ 
+-<screen><userinput remap="pre">patch -Np1 -i ../&coreutils-i18n-patch;</userinput></screen>
++<screen><userinput remap="pre"># breaks on ppc#patch -Np1 -i ../&coreutils-i18n-patch;</userinput></screen>
+ 
+     <note>
+       <para>In the past, many bugs were found in this patch. When reporting new
+diff -Naur a/chapter06/creatingdirs.xml b/chapter06/creatingdirs.xml
+--- a/chapter06/creatingdirs.xml	2019-01-09 20:49:38.784914934 +0000
++++ b/chapter06/creatingdirs.xml	2019-01-09 20:50:54.271138823 +0000
 @@ -25,6 +25,9 @@
  
  case $(uname -m) in
@@ -197,9 +209,9 @@ diff -Naur olfs-8.3/chapter06/creatingdirs.xml nlfs-8.3/chapter06/creatingdirs.x
  esac
  
  mkdir -v /var/{log,mail,spool}
-diff -Naur olfs-8.3/chapter06/gcc.xml nlfs-8.3/chapter06/gcc.xml
---- olfs-8.3/chapter06/gcc.xml	2018-09-02 23:16:48.897734037 +0000
-+++ nlfs-8.3/chapter06/gcc.xml	2018-09-02 23:19:37.113714057 +0000
+diff -Naur a/chapter06/gcc.xml b/chapter06/gcc.xml
+--- a/chapter06/gcc.xml	2019-01-09 20:49:38.780914816 +0000
++++ b/chapter06/gcc.xml	2019-01-09 20:50:54.271138823 +0000
 @@ -49,6 +49,24 @@
      sed -e '/m64=/s/lib64/lib/' \
          -i.orig gcc/config/i386/t-linux64
@@ -214,13 +226,13 @@ diff -Naur olfs-8.3/chapter06/gcc.xml nlfs-8.3/chapter06/gcc.xml
 +
 +<screen><userinput remap="pre">case $(uname -m) in
 +  armv6l)
-+    patch -Np1 -i ../gcc-7.3.0-armv6.patch
++    patch -Np1 -i ../gcc-8.2.0-armv6.patch
 + ;;
 +  armv7l)
-+    patch -Np1 -i ../gcc-7.3.0-armv7.patch
++    patch -Np1 -i ../gcc-8.2.0-armv7.patch
 + ;;
 +  armv8l)
-+    patch -Np1 -i ../gcc-7.3.0-armv8.patch
++    patch -Np1 -i ../gcc-8.2.0-armv8.patch
 + ;;
  esac</userinput></screen>
  
@@ -233,9 +245,9 @@ diff -Naur olfs-8.3/chapter06/gcc.xml nlfs-8.3/chapter06/gcc.xml
               --with-system-zlib</userinput></screen>
  
      <para>Note that for other languages, there are some prerequisites that
-diff -Naur olfs-8.3/chapter06/glibc.xml nlfs-8.3/chapter06/glibc.xml
---- olfs-8.3/chapter06/glibc.xml	2018-09-02 23:16:48.897734037 +0000
-+++ nlfs-8.3/chapter06/glibc.xml	2018-09-02 23:17:45.987750950 +0000
+diff -Naur a/chapter06/glibc.xml b/chapter06/glibc.xml
+--- a/chapter06/glibc.xml	2019-01-09 20:49:38.780914816 +0000
++++ b/chapter06/glibc.xml	2019-01-09 20:50:54.275138940 +0000
 @@ -71,6 +71,12 @@
      required for the dynamic loader to function correctly:</para>
  
@@ -282,9 +294,9 @@ diff -Naur olfs-8.3/chapter06/glibc.xml nlfs-8.3/chapter06/glibc.xml
      <para>Install the configuration file and runtime directory for
      <command>nscd</command>:</para>
  
-diff -Naur olfs-8.3/chapter06/openssl.xml nlfs-8.3/chapter06/openssl.xml
---- olfs-8.3/chapter06/openssl.xml	2018-09-02 23:16:48.901734230 +0000
-+++ nlfs-8.3/chapter06/openssl.xml	2018-09-02 23:17:45.987750950 +0000
+diff -Naur a/chapter06/openssl.xml b/chapter06/openssl.xml
+--- a/chapter06/openssl.xml	2019-01-09 20:49:38.784914934 +0000
++++ b/chapter06/openssl.xml	2019-01-09 20:50:54.275138940 +0000
 @@ -45,11 +45,37 @@
  
      <para>Prepare OpenSSL for compilation:</para>
@@ -325,9 +337,9 @@ diff -Naur olfs-8.3/chapter06/openssl.xml nlfs-8.3/chapter06/openssl.xml
  
      <para>Compile the package:</para>
  
-diff -Naur olfs-8.3/chapter06/revisedchroot.xml nlfs-8.3/chapter06/revisedchroot.xml
---- olfs-8.3/chapter06/revisedchroot.xml	2018-09-02 23:16:48.901734230 +0000
-+++ nlfs-8.3/chapter06/revisedchroot.xml	2018-09-02 23:22:04.730447029 +0000
+diff -Naur a/chapter06/revisedchroot.xml b/chapter06/revisedchroot.xml
+--- a/chapter06/revisedchroot.xml	2019-01-09 20:49:38.784914934 +0000
++++ b/chapter06/revisedchroot.xml	2019-01-09 20:50:54.275138940 +0000
 @@ -50,12 +50,12 @@
    libraries are from binutils, bzip2, e2fsprogs, flex, libtool, and zlib.  If desired,
    remove them now:</para>
@@ -347,9 +359,9 @@ diff -Naur olfs-8.3/chapter06/revisedchroot.xml nlfs-8.3/chapter06/revisedchroot
  
    <para>There are also several files installed in the /usr/lib and /usr/libexec
    directories with a file name extention of .la. These are "libtool archive"
-diff -Naur olfs-8.3/chapter07/usage.xml nlfs-8.3/chapter07/usage.xml
---- olfs-8.3/chapter07/usage.xml	2018-09-02 23:16:48.917735005 +0000
-+++ nlfs-8.3/chapter07/usage.xml	2018-09-02 23:17:45.995751157 +0000
+diff -Naur a/chapter07/usage.xml b/chapter07/usage.xml
+--- a/chapter07/usage.xml	2019-01-09 20:49:38.800915406 +0000
++++ b/chapter07/usage.xml	2019-01-09 20:50:54.275138940 +0000
 @@ -85,6 +85,9 @@
  4:2345:respawn:/sbin/agetty tty4 9600
  5:2345:respawn:/sbin/agetty tty5 9600
@@ -360,9 +372,9 @@ diff -Naur olfs-8.3/chapter07/usage.xml nlfs-8.3/chapter07/usage.xml
  
  # End /etc/inittab</literal>
  EOF</userinput></screen>
-diff -Naur olfs-8.3/chapter08/kernel.xml nlfs-8.3/chapter08/kernel.xml
---- olfs-8.3/chapter08/kernel.xml	2018-09-02 23:16:48.921735199 +0000
-+++ nlfs-8.3/chapter08/kernel.xml	2018-09-02 23:17:45.995751157 +0000
+diff -Naur a/chapter08/kernel.xml b/chapter08/kernel.xml
+--- a/chapter08/kernel.xml	2019-01-09 20:49:38.800915406 +0000
++++ b/chapter08/kernel.xml	2019-01-09 20:50:54.275138940 +0000
 @@ -214,7 +214,7 @@
  
      <para>Install the modules, if the kernel configuration uses them:</para>
@@ -387,9 +399,9 @@ diff -Naur olfs-8.3/chapter08/kernel.xml nlfs-8.3/chapter08/kernel.xml
  
  <screen revision="systemd"><userinput remap="install">cp -iv arch/x86/boot/bzImage /boot/vmlinuz-&linux-version;-lfs-&versiond;</userinput></screen>
  
-diff -Naur olfs-8.3/prologue/architecture.xml nlfs-8.3/prologue/architecture.xml
---- olfs-8.3/prologue/architecture.xml	2018-09-02 23:16:48.917735005 +0000
-+++ nlfs-8.3/prologue/architecture.xml	2018-09-02 23:17:45.995751157 +0000
+diff -Naur a/prologue/architecture.xml b/prologue/architecture.xml
+--- a/prologue/architecture.xml	2019-01-09 20:49:38.800915406 +0000
++++ b/prologue/architecture.xml	2019-01-09 20:50:54.275138940 +0000
 @@ -20,6 +20,10 @@
  distribution can be installed and used as a host system on a 64-bit AMD/Intel
  computer.</para>
